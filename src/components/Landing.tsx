@@ -418,10 +418,10 @@ const Team = () => {
               className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent opacity-80"></div>
-            <div className="absolute bottom-0 left-0 p-12">
-              <h3 className="text-4xl md:text-5xl font-serif text-bone mb-2">Juridico Camacaro</h3>
-              <p className="text-gold-light uppercase tracking-[0.3em] text-xs font-bold mb-6">Socio Fundador & Asociados</p>
-              <p className="text-bone/70 max-w-lg font-light leading-relaxed">
+            <div className="absolute bottom-0 left-0 p-6 md:p-12">
+              <h3 className="text-3xl md:text-5xl font-serif text-bone mb-2">Juridico Camacaro</h3>
+              <p className="text-gold-light uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold mb-4 md:group-hover:mb-6 transition-all">Socio Fundador & Asociados</p>
+              <p className="text-bone/70 max-w-lg text-sm md:text-base font-light leading-relaxed line-clamp-3 md:line-clamp-none">
                 Líder visionario con más de dos décadas de experiencia en litigios de alto perfil. Su enfoque combina la agresividad procesal con una sofisticación técnica inigualable.
               </p>
             </div>
