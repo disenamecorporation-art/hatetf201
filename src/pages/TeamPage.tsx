@@ -15,14 +15,14 @@ export default function TeamPage() {
       name: "Dr. Edwin Camacaro Espinoza",
       role: "Socio Fundador & Asociados",
       description: "Especialista en Derecho Penal y Criminología con más de 20 años de trayectoria. Ha liderado defensas en casos de trascendencia nacional e internacional, destacándose por su rigor técnico y ética inquebrantable.",
-      image: "https://i.postimg.cc/g0hpBJzk/image.png",
+      image: "https://i.postimg.cc/bN4K53ky/cf862122-3547-4115-aa87-a59689be585c.jpg",
       specialties: ["Derecho Penal", "Estrategia Procesal", "Casación"]
     },
     {
       name: "Dr. Carlos Solon Morillo Zambrano",
       role: "Socio Senior",
       description: "Destacado jurista con amplia experiencia en litigios complejos y asesoría estratégica. Su compromiso con la excelencia y la justicia refuerza el pilar fundamental de nuestra firma.",
-      image: "https://i.postimg.cc/0QdsPBKt/image.png",
+      image: "https://i.postimg.cc/1Rwm31zq/image.png",
       specialties: ["Derecho Civil", "Asesoría Estratégica", "Litigios"]
     },
     {

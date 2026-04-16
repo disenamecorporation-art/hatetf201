@@ -471,12 +471,12 @@ const Team = () => {
     {
       name: "Dr. Edwin Camacaro Espinoza",
       role: "Socio Fundador & Asociados",
-      image: "https://i.postimg.cc/g0hpBJzk/image.png"
+      image: "https://i.postimg.cc/bN4K53ky/cf862122-3547-4115-aa87-a59689be585c.jpg"
     },
     {
       name: "Dr. Carlos Solon Morillo Zambrano",
       role: "Socio Senior",
-      image: "https://i.postimg.cc/0QdsPBKt/image.png"
+      image: "https://i.postimg.cc/1Rwm31zq/image.png"
     },
     {
       name: "Dra. Elena Rodríguez",
