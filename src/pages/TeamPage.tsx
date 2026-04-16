@@ -12,11 +12,18 @@ export default function TeamPage() {
 
   const teamMembers = [
     {
-      name: "Juridico Camacaro",
+      name: "Dr. Edwin Camacaro Espinoza",
       role: "Socio Fundador & Asociados",
       description: "Especialista en Derecho Penal y Criminología con más de 20 años de trayectoria. Ha liderado defensas en casos de trascendencia nacional e internacional, destacándose por su rigor técnico y ética inquebrantable.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop",
+      image: "https://i.postimg.cc/g0hpBJzk/image.png",
       specialties: ["Derecho Penal", "Estrategia Procesal", "Casación"]
+    },
+    {
+      name: "Dr. Carlos Solon Morillo Zambrano",
+      role: "Socio Senior",
+      description: "Destacado jurista con amplia experiencia en litigios complejos y asesoría estratégica. Su compromiso con la excelencia y la justicia refuerza el pilar fundamental de nuestra firma.",
+      image: "https://i.postimg.cc/0QdsPBKt/image.png",
+      specialties: ["Derecho Civil", "Asesoría Estratégica", "Litigios"]
     },
     {
       name: "Dra. Elena Rodríguez",
@@ -31,13 +38,6 @@ export default function TeamPage() {
       description: "Especialista en derecho mercantil y protección patrimonial. Su enfoque preventivo ha salvaguardado los intereses de importantes grupos corporativos durante la última década.",
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop",
       specialties: ["Derecho Mercantil", "Contratos Complejos", "Arbitraje"]
-    },
-    {
-      name: "Dra. Sofía Valera",
-      role: "Especialista en Responsabilidad Penal del Adolescente",
-      description: "Con una formación académica de élite, la Dra. Valera lidera nuestra unidad de protección integral, asegurando el cumplimiento de los estándares internacionales en materia de menores.",
-      image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=2070&auto=format&fit=crop",
-      specialties: ["Derecho Juvenil", "Protección Integral", "Reinserción"]
     }
   ];
 

@@ -1,7 +1,8 @@
 import { useState, useEffect, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Link } from 'react-router-dom';
-import { Menu, X, ChevronRight, Scale, Globe, Briefcase, Shield, Users, ArrowRight, Instagram, Linkedin, Mail, Phone, MessageCircle, MapPin, Clock } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { Menu, X, ChevronRight, Scale, Globe, Briefcase, Shield, Users, ArrowRight, Instagram, Linkedin, Mail, Phone, MessageCircle, MapPin, Clock, LogOut, User as UserIcon, Star } from 'lucide-react';
 
 // --- Services Data ---
 export const servicesData = [
@@ -43,6 +44,8 @@ export const servicesData = [
 const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, role, signOut } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,6 +61,11 @@ const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
     { name: 'El Equipo', href: '/equipo' },
     { name: 'Contacto', href: '/contacto' },
   ];
+
+  // Add exclusive link for Premium/Admin
+  if (role === 'premium' || role === 'admin') {
+    navLinks.push({ name: 'Prueba', href: '/prueba' });
+  }
 
   return (
     <nav 
@@ -83,20 +91,54 @@ const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-12">
+        <div className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               to={link.href}
-              className={`text-sm font-medium uppercase tracking-widest transition-colors duration-500 relative group ${isScrolled ? 'text-deep-black/70 hover:text-gold-dark' : 'text-bone/70 hover:text-gold-dark'}`}
+              className={`text-[10px] font-bold uppercase tracking-widest transition-colors duration-500 relative group ${isScrolled ? 'text-deep-black/70 hover:text-gold-dark' : 'text-bone/70 hover:text-gold-dark'}`}
             >
               {link.name}
               <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold-dark transition-all duration-300 group-hover:w-full"></span>
             </Link>
           ))}
+          
+          {role === 'admin' && (
+            <Link 
+              to="/admin"
+              className={`text-[10px] font-bold uppercase tracking-widest transition-colors duration-500 flex items-center gap-2 ${isScrolled ? 'text-gold-dark hover:text-deep-black' : 'text-gold-dark hover:text-bone'}`}
+            >
+              <Shield size={14} /> Panel
+            </Link>
+          )}
+
+          {role === 'premium' && (
+            <span className="text-[10px] font-bold uppercase tracking-widest text-gold-dark flex items-center gap-2">
+              <Star size={14} /> Premium
+            </span>
+          )}
+
+          <div className="h-6 w-px bg-gold-dark/20 mx-2"></div>
+
+          {user ? (
+            <button 
+              onClick={() => signOut()}
+              className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-colors duration-500 ${isScrolled ? 'text-deep-black/70 hover:text-red-600' : 'text-bone/70 hover:text-red-400'}`}
+            >
+              <LogOut size={16} /> Salir
+            </button>
+          ) : (
+            <Link 
+              to="/login"
+              className={`flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest transition-colors duration-500 ${isScrolled ? 'text-deep-black/70 hover:text-gold-dark' : 'text-bone/70 hover:text-gold-dark'}`}
+            >
+              <UserIcon size={16} /> Acceso
+            </Link>
+          )}
+
           <button 
             onClick={onOpenModal}
-            className={`px-6 py-2.5 text-xs uppercase tracking-widest font-bold transition-all duration-500 rounded-sm ${isScrolled ? 'bg-deep-black text-bone hover:bg-gold-dark' : 'bg-bone text-deep-black hover:bg-gold-dark hover:text-bone'}`}
+            className={`px-6 py-2.5 text-[10px] uppercase tracking-widest font-bold transition-all duration-500 rounded-sm ${isScrolled ? 'bg-deep-black text-bone hover:bg-gold-dark' : 'bg-bone text-deep-black hover:bg-gold-dark hover:text-bone'}`}
           >
             Consulta
           </button>
@@ -131,6 +173,39 @@ const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
                   {link.name}
                 </Link>
               ))}
+              
+              {role === 'admin' && (
+                <Link 
+                  to="/admin"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-lg font-serif text-gold-dark flex items-center gap-3"
+                >
+                  <Shield size={20} /> Panel de Control
+                </Link>
+              )}
+
+              <div className="h-px bg-gold-dark/10 w-full"></div>
+
+              {user ? (
+                <button 
+                  onClick={() => {
+                    signOut();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center gap-3 text-lg font-serif text-red-600"
+                >
+                  <LogOut size={20} /> Cerrar Sesión
+                </button>
+              ) : (
+                <Link 
+                  to="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-3 text-lg font-serif text-deep-black"
+                >
+                  <UserIcon size={20} /> Iniciar Sesión
+                </Link>
+              )}
+
               <button 
                 onClick={() => {
                   setIsMobileMenuOpen(false);
@@ -390,8 +465,31 @@ const Services = () => {
   );
 };
 
-// --- Team Section (Bento Grid) ---
+// --- Team Section (Circular Design) ---
 const Team = () => {
+  const teamData = [
+    {
+      name: "Dr. Edwin Camacaro Espinoza",
+      role: "Socio Fundador & Asociados",
+      image: "https://i.postimg.cc/g0hpBJzk/image.png"
+    },
+    {
+      name: "Dr. Carlos Solon Morillo Zambrano",
+      role: "Socio Senior",
+      image: "https://i.postimg.cc/0QdsPBKt/image.png"
+    },
+    {
+      name: "Dra. Elena Rodríguez",
+      role: "Socia Senior",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop"
+    },
+    {
+      name: "Abg. Ricardo Méndez",
+      role: "Director de Litigios",
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop"
+    }
+  ];
+
   return (
     <section id="equipo" className="py-32 bg-bone">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -404,83 +502,37 @@ const Team = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[300px]">
-          {/* Main Profile */}
-          <motion.div 
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 20 }}
-            viewport={{ once: true }}
-            className="md:col-span-8 md:row-span-2 relative group overflow-hidden rounded-sm"
-          >
-            <img 
-              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop" 
-              alt="Edwin Camacaro" 
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-deep-black via-transparent to-transparent opacity-80"></div>
-            <div className="absolute bottom-0 left-0 p-6 md:p-12">
-              <h3 className="text-3xl md:text-5xl font-serif text-bone mb-2">Juridico Camacaro</h3>
-              <p className="text-gold-light uppercase tracking-[0.3em] text-[10px] md:text-xs font-bold mb-4 md:group-hover:mb-6 transition-all">Socio Fundador & Asociados</p>
-              <p className="text-bone/70 max-w-lg text-sm md:text-base font-light leading-relaxed line-clamp-3 md:line-clamp-none">
-                Líder visionario con más de dos décadas de experiencia en litigios de alto perfil. Su enfoque combina la agresividad procesal con una sofisticación técnica inigualable.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Multidisciplinary Info */}
-          <motion.div 
-            whileInView={{ opacity: 1, x: 0 }}
-            initial={{ opacity: 0, x: 20 }}
-            viewport={{ once: true }}
-            className="md:col-span-4 md:row-span-1 bg-deep-black p-10 flex flex-col justify-center rounded-sm"
-          >
-            <Users className="text-gold-dark mb-6" size={40} />
-            <h4 className="text-2xl font-serif text-bone mb-4">Grupo Multidisciplinario</h4>
-            <p className="text-bone/50 text-sm font-light leading-relaxed">
-              No somos solo abogados. Somos investigadores, consultores y estrategas trabajando en perfecta sincronía.
-            </p>
-          </motion.div>
-
-          {/* Stats/Values */}
-          <motion.div 
-            whileInView={{ opacity: 1, x: 0 }}
-            initial={{ opacity: 0, x: 20 }}
-            viewport={{ once: true }}
-            className="md:col-span-4 md:row-span-1 bg-gold-dark p-10 flex flex-col justify-center rounded-sm"
-          >
-            <div className="text-5xl font-serif text-deep-black mb-2">98%</div>
-            <p className="text-deep-black/80 text-xs uppercase tracking-widest font-bold mb-6">Casos de Éxito</p>
-            <p className="text-deep-black/70 text-sm font-light italic">
-              "La excelencia no es un acto, sino un hábito que define cada uno de nuestros movimientos."
-            </p>
-          </motion.div>
-
-          {/* Secondary Team Members Grid */}
-          <motion.div 
-            whileInView={{ opacity: 1, y: 0 }}
-            initial={{ opacity: 0, y: 20 }}
-            viewport={{ once: true }}
-            className="md:col-span-12 md:row-span-1 grid grid-cols-2 md:grid-cols-4 gap-6"
-          >
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="relative group overflow-hidden h-full rounded-sm">
-                <img 
-                  src={`https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop&sig=${i}`} 
-                  alt="Team Member" 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-deep-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
-                  <div className="text-bone">
-                    <p className="text-xs font-bold uppercase tracking-widest">Asociado Senior</p>
-                    <p className="font-serif italic">Consultor Jurídico</p>
-                  </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-16">
+          {teamData.map((member, index) => (
+            <motion.div 
+              key={member.name}
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.8 }}
+              className="flex flex-col items-center text-center group"
+            >
+              <div className="relative w-32 h-32 md:w-48 md:h-48 mb-6">
+                <div className="absolute inset-0 rounded-full border border-gold-dark/20 scale-110 group-hover:scale-100 transition-transform duration-700"></div>
+                <div className="w-full h-full rounded-full overflow-hidden border-2 border-transparent group-hover:border-gold-dark transition-colors duration-500">
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                  />
                 </div>
               </div>
-            ))}
-          </motion.div>
+              <h3 className="text-lg md:text-xl font-serif text-deep-black mb-1 tracking-tight group-hover:text-gold-dark transition-colors">
+                {member.name}
+              </h3>
+              <p className="text-[10px] uppercase tracking-widest text-deep-black/40 font-bold">
+                {member.role}
+              </p>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="mt-16 text-center">
+        <div className="mt-24 text-center">
           <Link to="/equipo">
             <motion.button 
               whileHover={{ scale: 1.05 }}
