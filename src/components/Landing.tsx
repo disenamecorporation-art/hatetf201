@@ -479,14 +479,14 @@ const Team = () => {
       image: "https://i.postimg.cc/1Rwm31zq/image.png"
     },
     {
-      name: "Dra. Elena Rodríguez",
-      role: "Socia Senior",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop"
+      name: "Dra. Yeniret Paredes Coelho",
+      role: "",
+      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop"
     },
     {
-      name: "Abg. Ricardo Méndez",
-      role: "Director de Litigios",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop"
+      name: "Dra. Deyanira Yulieth Zambrano Gómez",
+      role: "",
+      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop"
     }
   ];
 

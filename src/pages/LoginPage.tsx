@@ -3,11 +3,12 @@ import { motion } from 'motion/react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { Navbar, Footer } from '../components/Landing';
-import { Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
+import { Mail, Lock, ArrowRight, AlertCircle, Eye, EyeOff } from 'lucide-react';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -72,18 +73,28 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-[10px] uppercase tracking-widest font-bold text-deep-black/40">Contraseña</label>
+            <div className="space-y-2 relative">
+              <div className="flex justify-between items-center">
+                <label className="text-[10px] uppercase tracking-widest font-bold text-deep-black/40">Contraseña</label>
+                <Link to="/recover" className="text-[9px] uppercase tracking-wide font-bold text-gold-dark hover:underline">¿Olvidaste tu clave?</Link>
+              </div>
               <div className="relative">
                 <Lock className="absolute left-0 top-1/2 -translate-y-1/2 text-gold-dark" size={18} />
                 <input 
-                  type="password" 
+                  type={showPassword ? "text" : "password"} 
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-transparent border-b border-deep-black/10 py-3 pl-8 focus:border-gold-dark outline-none transition-colors font-light" 
+                  className="w-full bg-transparent border-b border-deep-black/10 py-3 pl-8 pr-10 focus:border-gold-dark outline-none transition-colors font-light" 
                   placeholder="••••••••"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 text-deep-black/30 hover:text-gold-dark transition-colors"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
             </div>
 

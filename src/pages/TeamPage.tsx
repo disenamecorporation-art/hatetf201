@@ -26,18 +26,18 @@ export default function TeamPage() {
       specialties: ["Derecho Civil", "Asesoría Estratégica", "Litigios"]
     },
     {
-      name: "Dra. Elena Rodríguez",
-      role: "Socia Senior - Derecho Internacional",
-      description: "Experta en tratados internacionales y derechos humanos. Su visión global permite a la firma abordar litigios transfronterizos con una precisión estratégica única en la región.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976&auto=format&fit=crop",
-      specialties: ["Penal Internacional", "Extradiciones", "DDHH"]
+      name: "Dra. Yeniret Paredes Coelho",
+      role: "",
+      description: "Destacada profesional dedicada a la excelencia jurídica y la protección de los intereses de nuestros clientes con un enfoque ético y multidisciplinario.",
+      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop",
+      specialties: ["Derecho Integral", "Excelencia Jurídica"]
     },
     {
-      name: "Abg. Ricardo Méndez",
-      role: "Director de Litigios Civiles",
-      description: "Especialista en derecho mercantil y protección patrimonial. Su enfoque preventivo ha salvaguardado los intereses de importantes grupos corporativos durante la última década.",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974&auto=format&fit=crop",
-      specialties: ["Derecho Mercantil", "Contratos Complejos", "Arbitraje"]
+      name: "Dra. Deyanira Yulieth Zambrano Gómez",
+      role: "",
+      description: "Comprometida con los más altos estándares de práctica legal, brindando soluciones estratégicas y una defensa técnica rigurosa.",
+      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop",
+      specialties: ["Asesoría Estratégica", "Compromiso Ético"]
     }
   ];
 
